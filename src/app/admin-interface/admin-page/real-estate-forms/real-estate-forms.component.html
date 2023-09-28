@@ -1,0 +1,335 @@
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Real Estate Form
+  </h3>
+
+  <div class="card-body">
+    <div class="table-editable">
+      <div class="d-flex justify-content-between">
+        <form class="navbar-form" role="search">
+          <div class="input-group add-on">
+            <input
+              class="form-control"
+              placeholder="Search"
+              name="srch-term"
+              #searchTerm
+              type="text"
+            />
+            <div class="input-group-btn">
+              <button
+                class="btn btn-default"
+                (click)="searchByName(searchTerm.value)"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="openPopup()"
+        >
+          Add job Details
+        </button>
+      </div>
+      <table
+        class="table table-bordered table-responsive-md table-striped text-center"
+        *ngIf="allPropertyDetail.length"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Sr No</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Area</th>
+            <th class="text-center">image1</th>
+            <th class="text-center">image2</th>
+            <th class="text-center">image3</th>
+            <th class="text-center">image4</th>
+            <th class="text-center">image5</th>
+            <th class="text-center">SQFT</th>
+            <th class="text-center">Bedroom</th>
+            <th class="text-center">Bathroom</th>
+            <th class="text-center">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of allPropertyDetail; let i = index">
+            <td class="pt-3-half">{{ i + 1 }}</td>
+            <td class="pt-3-half">
+              {{ item.flatCategories }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.area }}
+            </td>
+            <td *ngFor="let data of item.images">
+              <img
+                class="card-img-top"
+                [src]="data.src"
+                onerror="this.src='../../assets/image_placeholder.jpg';"
+              />
+            </td>
+            <td class="pt-3-half">
+              {{ item.sqft }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.bedroom }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.bathroom }}
+            </td>
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-danger btn-rounded btn-sm my-0"
+                  (click)="deleteItem(item.id)"
+                >
+                  Remove
+                </button></span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-no-data *ngIf="allPropertyDetail.length == 0"></app-no-data>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Add job category</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="registration-form">
+          <form [formGroup]="form">
+            <div class="form-icon">
+              <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="flatCategories"
+              >
+                <option selected>Please select Flat Categories</option>
+                <option *ngFor="let i of flatCategories">
+                  {{ i }}
+                </option>
+              </select>
+              <mat-error
+                *ngIf="
+                  submitted && form.get('flatCategories').hasError('required')
+                "
+              >
+                flatCategories is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control item"
+                placeholder="House Name/Building name"
+                formControlName="property_name"
+              />
+              <mat-error
+                *ngIf="
+                  submitted && form.get('property_name').hasError('required')
+                "
+              >
+                property name is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control item"
+                placeholder="Address"
+                formControlName="address"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('address').hasError('required')"
+              >
+                Address is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="number"
+                class="form-control item"
+                placeholder="SQFT"
+                formControlName="sqft"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('sqft').hasError('required')"
+              >
+                SQFT is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="number"
+                class="form-control item"
+                placeholder="Bedroom"
+                formControlName="bedroom"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('bedroom').hasError('required')"
+              >
+                Bedroom is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="number"
+                class="form-control item"
+                placeholder="Bathroom"
+                formControlName="bathroom"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('bathroom').hasError('required')"
+              >
+                Bathroom is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control item"
+                placeholder="area"
+                formControlName="area"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('area').hasError('required')"
+              >
+                Location is required
+              </mat-error>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control item"
+                placeholder="image1"
+                formControlName="image1"
+                #picture
+                (change)="onImageUpload($event, 1)"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('image1').hasError('required')"
+              >
+                image1 is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control item"
+                placeholder="image2"
+                formControlName="image2"
+                #picture
+                (change)="onImageUpload($event, 2)"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('image2').hasError('required')"
+              >
+                image2 is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control item"
+                placeholder="image3"
+                formControlName="image3"
+                #picture
+                (change)="onImageUpload($event, 3)"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('image3').hasError('required')"
+              >
+                image3 is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control item"
+                placeholder="image4"
+                formControlName="image4"
+                #picture
+                (change)="onImageUpload($event, 4)"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('image4').hasError('required')"
+              >
+                image4 is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control item"
+                placeholder="image5"
+                formControlName="image5"
+                #picture
+                (change)="onImageUpload($event, 5)"
+              />
+              <mat-error
+                *ngIf="submitted && form.get('image5').hasError('required')"
+              >
+                image5 is required
+              </mat-error>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #closebutton
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="closeModal"
+          (click)="Submit()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="showLoader"></app-loader>

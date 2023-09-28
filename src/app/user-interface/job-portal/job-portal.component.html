@@ -1,0 +1,78 @@
+<!-- Category Start -->
+<div class="container-xxl py-5 portal_wrapper">
+  <div class="container">
+    <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
+      Explore By Category
+    </h1>
+    <div class="container">
+      <div class="row mb-4">
+        <div
+          class="col-lg-3 col-md-6 mb-4"
+          *ngFor="let item of jobCategory"
+          routerLink="job-category-detail/{{ item.name }}"
+          style="cursor: pointer"
+        >
+          <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+            <!--card-body-->
+            <div class="card-body p-4">
+              <div class="d-flex mb-4 align-items-center">
+                <!--Companies group-->
+                <div class="flex-grow-1 d-flex align-items-center">
+                  <!--Campany-->
+                  <div
+                    class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                  >
+                    <img
+                      src="../../../../assets/icon-search.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                  </div>
+                  <!--Campany-->
+                  <div
+                    class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                  >
+                    <img
+                      src="../../../../assets/icon-deal.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                  </div>
+                  <!--Campany-->
+                  <div
+                    class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                  >
+                    <img
+                      src="../../../../assets/icon-search.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <h5>{{ item.name }}</h5>
+              <p class="mb-0 text-muted">124 Jobs opportunities</p>
+            </div>
+            <!--link-->
+            <!-- <a href="#!" class="stretched-link"></a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row g-4">
+      <div
+        style="cursor: pointer"
+        *ngFor="let item of jobCategory"
+        class="col-lg-3 col-sm-6 wow fadeInUp pe-auto"
+        data-wow-delay="0.1s"
+        routerLink="job-category-detail/{{ item.name }}"
+      >
+        <div class="cat-item rounded p-4">
+          <i class="bi bi-building text-primary mb-4 font_size"></i>
+          <h6 class="mb-3">{{ item.name }}</h6>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+<!-- Category End -->

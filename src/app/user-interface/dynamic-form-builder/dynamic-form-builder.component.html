@@ -1,0 +1,20 @@
+<form
+  (ngSubmit)="onSubmit.emit(this.form.value)"
+  [formGroup]="form"
+  class="form-horizontal"
+>
+  <div *ngFor="let field of fields">
+    <app-field-builder
+      [field]="field"
+      [form]="form"
+      [submittedForm]="submittedForm"
+      (selectedVal)="getSelectedVal($event)"
+      (selectedFile)="getFile($event)"
+    ></app-field-builder>
+  </div>
+  <div class="d-flex justify-content-center pt-3">
+    <button type="submit" (click)="submit()" class="btn btn-primary">
+      Submit form
+    </button>
+  </div>
+</form>

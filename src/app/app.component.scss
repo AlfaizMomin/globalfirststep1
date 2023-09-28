@@ -1,0 +1,14 @@
+::ng-deep .custom-style-error {
+  background-color: rgb(125, 59, 59);
+  color: white;
+}
+
+::ng-deep .custom-style-success {
+  background-color: rgb(97, 143, 97);
+  color: white;
+}
+
+::ng-deep .custom-style-warn {
+  background-color: rgb(98, 98, 35);
+  color: white;
+}

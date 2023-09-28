@@ -1,0 +1,4 @@
+<app-load-view *ngIf="loader"></app-load-view>
+<div class="container bg-white p-0" *ngIf="!loader">
+  <router-outlet></router-outlet>
+</div>

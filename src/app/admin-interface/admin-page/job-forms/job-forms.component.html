@@ -1,0 +1,221 @@
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Job Detail
+  </h3>
+
+  <div class="card-body">
+    <div class="table-editable">
+      <div class="d-flex justify-content-between">
+        <form class="navbar-form" role="search">
+          <div class="input-group add-on">
+            <input
+              class="form-control"
+              placeholder="Search"
+              name="srch-term"
+              #searchTerm
+              type="text"
+            />
+            <div class="input-group-btn">
+              <button
+                class="btn btn-default"
+                (click)="searchByName(searchTerm.value)"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="openPopup()"
+        >
+          Add job Details
+        </button>
+      </div>
+      <table
+        class="table table-bordered table-responsive-md table-striped text-center"
+        *ngIf="allJobDetail.length"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Sr No</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">Vacancy</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of allJobDetail; let i = index">
+            <td class="pt-3-half">{{ i + 1 }}</td>
+            <td class="pt-3-half">
+              {{ item.job_category }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.location }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.vacancy }}
+            </td>
+            <td class="pt-3-half">
+              {{ item.description }}
+            </td>
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-info btn-rounded btn-sm my-0"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  (click)="edit(item)"
+                >
+                  Edit
+                </button></span
+              >
+            </td>
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-danger btn-rounded btn-sm my-0"
+                  (click)="deleteItem(item.id)"
+                >
+                  Remove
+                </button></span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-no-data *ngIf="allJobDetail.length == 0"></app-no-data>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Add job category</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="registration-form">
+          <form [formGroup]="jobDetails">
+            <div class="form-icon">
+              <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="job_category"
+              >
+                <option selected>Please select job category</option>
+                <option *ngFor="let i of jobCategory">
+                  {{ i.name }}
+                </option>
+              </select>
+              <mat-error
+                *ngIf="
+                  submitted &&
+                  jobDetails.get('job_category').hasError('required')
+                "
+              >
+                project name is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control item"
+                placeholder="Vacancy"
+                formControlName="vacancy"
+              />
+              <mat-error
+                *ngIf="
+                  submitted && jobDetails.get('vacancy').hasError('required')
+                "
+              >
+                project name is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control item"
+                id="password"
+                placeholder="Location"
+                formControlName="location"
+              />
+              <mat-error
+                *ngIf="
+                  submitted && jobDetails.get('location').hasError('required')
+                "
+              >
+                project name is required
+              </mat-error>
+            </div>
+            <div class="form-group">
+              <div class="md-form">
+                <textarea
+                  type="text"
+                  id="form7"
+                  class="md-textarea form-control"
+                  placeholder="Description"
+                  formControlName="description"
+                ></textarea>
+              </div>
+            </div>
+            <mat-error
+              *ngIf="
+                submitted && jobDetails.get('description').hasError('required')
+              "
+            >
+              project name is required
+            </mat-error>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #closebutton
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="closeModal"
+          (click)="Submit()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="showLoader"></app-loader>

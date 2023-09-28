@@ -1,0 +1,8 @@
+<div class="card-body p-md-5 text-black">
+  <h1 class="mb-5 fs-1 text-uppercase fw-bold text-primary">Contact Details</h1>
+  <app-dynamic-form-builder
+    (selectedValue)="getValue($event)"
+    [fields]="fields"
+    (onSubmit)="submit($event)"
+  ></app-dynamic-form-builder>
+</div>

@@ -1,0 +1,127 @@
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Job Categories
+  </h3>
+
+  <div class="card-body">
+    <div class="table-editable">
+      <div class="d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="openPopup()"
+        >
+          Add job category
+        </button>
+      </div>
+      <table
+        class="table table-bordered table-responsive-md table-striped text-center"
+        *ngIf="jobCategory.length"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of jobCategory">
+            <td class="pt-3-half">{{ item.id }}</td>
+            <td class="pt-3-half">{{ item.name }}</td>
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-info btn-rounded btn-sm my-0"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  (click)="edit(item)"
+                >
+                  Edit
+                </button></span
+              >
+            </td>
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-danger btn-rounded btn-sm my-0"
+                  (click)="deleteItem(item.id)"
+                >
+                  Remove
+                </button></span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-no-data *ngIf="jobCategory.length == 0"></app-no-data>
+  </div>
+</div>
+<!-- Editable table -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content" [formGroup]="jobCatagoryForm" novalidate>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add job category</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control item"
+            placeholder="Please enter job category"
+          />
+          <mat-error
+            *ngIf="
+              submitted && jobCatagoryForm.get('name').hasError('required')
+            "
+          >
+            Name is required
+          </mat-error>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #closebutton
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="closeModal"
+          (click)="Submit()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="showLoader"></app-loader>

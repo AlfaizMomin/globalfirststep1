@@ -1,0 +1,17 @@
+<div class="col-md-12 mb-12" [formGroup]="form">
+  <div class="form-outline">
+    <input
+      class="form-control"
+      type="file"
+      [formControlName]="field.name"
+      #picture
+      (change)="imageUpload($event)"
+      accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+    />
+    <label class="form-label"
+      >{{ field.label }}
+      <strong class="text-danger">*</strong>
+    </label>
+    <div></div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="table-responsive" *ngIf="financeData.length">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Finance Data
+  </h3>
+  <div class="d-flex justify-content-between">
+    <form class="navbar-form" role="search">
+      <div class="input-group add-on">
+        <input
+          class="form-control"
+          placeholder="Search"
+          name="srch-term"
+          #searchTerm
+          type="text"
+        />
+        <div class="input-group-btn">
+          <button
+            class="btn btn-default"
+            (click)="searchByName(searchTerm.value)"
+          >
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-sm m-0" (click)="getCsv()">
+      Download CSV
+    </button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sr No.</th>
+        <th>Loan type</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Location</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Annual Income</th>
+        <th>Income Source</th>
+        <th>Comapny Name/ Buisness Name</th>
+        <th>Comapny/Buisness Experience</th>
+        <th>Purchase</th>
+        <th>Loan Type</th>
+        <th>Property Type</th>
+        <th>Required Amount</th>
+        <th>Cibil Score</th>
+        <th>Experience</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of financeData; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.loan_type }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.mobile }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.income }}</td>
+        <td>{{ item.income_source }}</td>
+        <td>
+          {{
+            item.loan_type == "business_loan"
+              ? item.business
+              : item.company_name
+          }}
+        </td>
+        <td>{{ item.experience }}</td>
+        <td>{{ item.purchase }}</td>
+        <td>{{ item.loan_type }}</td>
+        <td>{{ item.proerty_type }}</td>
+        <td>{{ item.required_amount }}</td>
+        <td>{{ item.cibil_score }}</td>
+        <td>{{ item.experience }}</td>
+
+        <td>
+          <span class="table-remove"
+            ><button
+              type="button"
+              class="btn btn-danger btn-rounded btn-sm my-0"
+              (click)="deleteItem(item.id)"
+            >
+              Remove
+            </button></span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-loader *ngIf="showLoader"></app-loader>
+<app-no-data *ngIf="financeData.length == 0"></app-no-data>

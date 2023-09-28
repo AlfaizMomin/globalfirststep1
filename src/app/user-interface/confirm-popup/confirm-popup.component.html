@@ -1,0 +1,76 @@
+<body class="container-fluid bg-body-tertiary d-block">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4" style="min-width: 500px">
+      <div
+        class="card bg-white mb-5 mt-5 border-0"
+        style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02)"
+      >
+        <div class="card-body p-5 text-center">
+          <h4>Verify</h4>
+          <p>Your code was sent to you via mobile number</p>
+
+          <div class="otp-field mb-4">
+            <input
+              type="text"
+              class="digit"
+              #otp11
+              maxlength="1"
+              (keyup)="otpMove($event, '', otp11, otp22, otp33, otp44)"
+            />
+            <input
+              type="text"
+              class="digit"
+              #otp22
+              maxlength="1"
+              (keyup)="otpMove($event, otp11, otp22, otp33, otp44, otp55)"
+            />
+            <input
+              type="text"
+              class="digit"
+              #otp33
+              maxlength="1"
+              (keyup)="otpMove($event, otp22, otp33, otp44, otp55, otp66)"
+            />
+            <input
+              type="text"
+              class="digit"
+              #otp44
+              maxlength="1"
+              (keyup)="otpMove($event, otp33, otp44, otp55, otp66, otp11)"
+            />
+            <input
+              type="text"
+              class="digit"
+              #otp55
+              maxlength="1"
+              (keyup)="otpMove($event, otp44, otp55, otp66, otp11, otp22)"
+            />
+            <input
+              type="text"
+              class="digit"
+              #otp66
+              maxlength="1"
+              (keyup)="otpMove($event, otp55, otp66, otp11, otp22, '')"
+            />
+          </div>
+
+          <button
+            class="btn btn-primary mb-3"
+            (click)="
+              verify(
+                otp11.value,
+                otp22.value,
+                otp33.value,
+                otp44.value,
+                otp55.value,
+                otp66.value
+              )
+            "
+          >
+            Verify
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

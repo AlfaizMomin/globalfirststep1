@@ -1,0 +1,41 @@
+<div class="form-group row" [formGroup]="form">
+  <!-- <label class="col-md-3 form-control-label" [attr.for]="field.label">
+    {{ field.label }}
+    <strong class="text-danger" *ngIf="field.required">*</strong>
+  </label> -->
+  <div class="col-md-12" [ngSwitch]="field.type">
+    <app-textbox
+      *ngSwitchCase="'text'"
+      [field]="field"
+      [form]="form"
+    ></app-textbox>
+    <app-dropdown
+      *ngSwitchCase="'dropdown'"
+      [field]="field"
+      [form]="form"
+      (selectedDropdownKey)="getval($event)"
+    ></app-dropdown>
+    <app-checkbox
+      *ngSwitchCase="'checkbox'"
+      [field]="field"
+      [form]="form"
+    ></app-checkbox>
+    <app-radio
+      *ngSwitchCase="'radio'"
+      [field]="field"
+      [form]="form"
+    ></app-radio>
+    <app-file
+      *ngSwitchCase="'file'"
+      [field]="field"
+      (FilePath)="onFileChange($event)"
+      [form]="form"
+    ></app-file>
+    <div
+      class="alert alert-danger my-1 p-2 fadeInDown animated"
+      *ngIf="!isValid && isDirty"
+    >
+      {{ field.label }} is required
+    </div>
+  </div>
+</div>

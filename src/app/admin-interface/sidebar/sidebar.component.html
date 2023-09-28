@@ -1,0 +1,29 @@
+<!-- Sidebar -->
+<!-- Basic Sidebar -->
+<div id="sidebar">
+  <div class="toggle-btn" (click)="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul>
+    <div class="iconshowlogo">
+      <ul>
+        <br />
+        <li>
+          <i class="fa fa-user" *ngIf="mobile" aria-hidden="true">
+            List icons can</i
+          >
+        </li>
+      </ul>
+    </div>
+    <li *ngFor="let item of sidebarOption">
+      <a
+        [routerLink]="item.path"
+        [routerLinkActive]="'is-active'"
+        class="list-group-item list-group-item-action py-2 ripple"
+        >{{ item.title }}</a
+      >
+    </li>
+  </ul>
+</div>

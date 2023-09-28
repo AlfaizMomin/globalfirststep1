@@ -1,0 +1,22 @@
+<div class="col-md-12 mb-12" [formGroup]="form">
+  <div class="form-outline">
+    <input
+      [attr.type]="field.type"
+      class="form-control"
+      [id]="field.name"
+      [name]="field.name"
+      [formControlName]="field.name"
+    />
+    <label class="form-label" for="form3Example1m"
+      >{{ field.label }}
+      <strong class="text-danger" *ngIf="field.required">*</strong>
+    </label>
+    <div
+      class="alert alert-danger my-1 p-2 fadeInDown animated"
+      *ngIf="!isValid && isDirty"
+    >
+      {{ field.label }} is required
+    </div>
+    <div></div>
+  </div>
+</div>

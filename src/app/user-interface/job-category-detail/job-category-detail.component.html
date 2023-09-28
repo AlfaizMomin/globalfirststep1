@@ -1,0 +1,51 @@
+<!-- <div class="tab-content">
+  <div id="tab-1" class="tab-pane fade show p-0 active">
+    <div class="job-item p-4 mb-4" *ngFor="let data of jobDetails">
+      <div class="row g-4">
+        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+          <img
+            class="flex-shrink-0 img-fluid border rounded"
+            src="./../../../assets/com-logo-1.jpg"
+            alt=""
+            style="width: 80px; height: 80px"
+          />
+          <div class="text-start ps-4">
+            <h5 class="mb-3">{{ data.job_category }}</h5>
+            <span class="text-truncate me-3"
+              ><i class="fa fa-map-marker-alt text-primary me-2"></i
+              >{{ data.location }}</span
+            >
+          </div>
+        </div>
+        <div
+          class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
+        >
+          <small class="text-truncate"
+            ><i class="far fa-calendar-alt text-primary me-2"></i
+            >{{ data.description }}</small
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container" style="margin-top: 50px">
+  <div class="row" *ngIf="jobDetails.length">
+    <div class="col-md-3" *ngFor="let item of jobDetails">
+      <div class="card-sl">
+        <div class="card-image">
+          <img src="./../../../assets/kpo.jpg" />
+        </div>
+        <div class="scrollable">
+          <div class="card-heading">{{ item.job_category }}</div>
+          <div class="card-text">
+            {{ item.description }}
+          </div>
+          <div class="card-text">Location: {{ item.location }}</div>
+          <div class="card-text">Vacancy: {{ item.vacancy }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-no-result *ngIf="jobDetails.length == 0"></app-no-result>
+</div>

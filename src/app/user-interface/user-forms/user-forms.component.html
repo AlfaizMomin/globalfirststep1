@@ -1,0 +1,35 @@
+<div class="container h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div id="recaptcha-container"></div>
+    <div class="col">
+      <div class="card card-registration my-4">
+        <div class="row g-0">
+          <div class="col-xl-6 d-xl-block">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+              alt="Sample photo"
+              class="img-fluid"
+              style="
+                border-top-left-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+              "
+            />
+          </div>
+          <div class="col-xl-6" *ngIf="category == 'Jobs'">
+            <app-job-forms></app-job-forms>
+          </div>
+
+          <div class="col-xl-6" *ngIf="category == 'finance'">
+            <app-loan-forms></app-loan-forms>
+          </div>
+          <div class="col-xl-6" *ngIf="category == 'real-estate'">
+            <app-real-estate-forms></app-real-estate-forms>
+          </div>
+          <div class="col-xl-6" *ngIf="category == 'e-seva'">
+            <app-e-seva-forms></app-e-seva-forms>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

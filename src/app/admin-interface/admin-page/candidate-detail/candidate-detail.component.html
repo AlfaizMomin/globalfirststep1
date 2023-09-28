@@ -1,0 +1,87 @@
+<div class="card" *ngIf="candidateData.length">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Candidate Details
+  </h3>
+
+  <div class="card-body">
+    <div class="table-editable">
+      <div class="d-flex justify-content-between">
+        <form class="navbar-form" role="search">
+          <div class="input-group add-on">
+            <input
+              class="form-control"
+              placeholder="Search"
+              name="srch-term"
+              #searchTerm
+              type="text"
+            />
+            <div class="input-group-btn">
+              <button
+                class="btn btn-default"
+                (click)="searchByName(searchTerm.value)"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm m-0"
+          (click)="getCsv()"
+        >
+          Download CSV
+        </button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sr No.</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Location</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of candidateData; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.firstName }}</td>
+            <td>{{ item.lastName }}</td>
+            <td>{{ item.mobile }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.Experiance }}</td>
+
+            <td>
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-info btn-rounded btn-sm my-0"
+                >
+                  <a href="{{ item.resume }}" target="_blank" download>
+                    View Resume
+                  </a>
+                </button></span
+              >
+              <span class="table-remove"
+                ><button
+                  type="button"
+                  class="btn btn-danger btn-rounded btn-sm my-0"
+                  (click)="deleteItem(item.id)"
+                >
+                  Remove
+                </button></span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="showLoader"></app-loader>
+<app-no-data *ngIf="candidateData.length == 0"></app-no-data>
