@@ -25,12 +25,9 @@ export class MailService {
           see_resume: data.see_resume,
         }
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         window.location.reload();
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
   }
 }

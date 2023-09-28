@@ -69,10 +69,7 @@ export class RealEstateFormsComponent {
 
   Submit() {
     this.submitted = true;
-    console.log(this.form.value);
-
     if (this.form.valid) {
-      console.log(this.form.value.images);
       let data = {
         images: this.images.slice(0, 5),
         area: this.form.value.area.toLowerCase(),
@@ -86,7 +83,6 @@ export class RealEstateFormsComponent {
       this.fireService.addPropertyDetails(data);
       this.form.reset();
       this.images = [];
-      console.log(this.images, 'this.images');
       this.submitted = false;
       this.isEdit = false;
       this.closebutton.nativeElement.click();

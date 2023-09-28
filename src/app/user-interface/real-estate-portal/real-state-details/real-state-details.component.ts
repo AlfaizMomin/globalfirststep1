@@ -35,7 +35,6 @@ export class RealStateDetailsComponent {
 
         snapshot.forEach((doc) => {
           this.allPropertyData.push(doc.data());
-          console.log(this.propertyData, 'this.propertyData');
         });
         this.getAreaList();
       });
@@ -50,7 +49,6 @@ export class RealStateDetailsComponent {
     this.propertyData = this.allPropertyData.filter((el) => {
       return el.area == this.areaList[0];
     });
-    console.log(this.areaList);
   }
 
   getPropertyById(item, index) {
@@ -59,7 +57,6 @@ export class RealStateDetailsComponent {
     this.propertyData = this.allPropertyData.filter((el) => {
       return el.area == item;
     });
-    console.log(this.propertyData, ' this.propertyData ');
   }
 
   onSlideClick(index: number) {
@@ -72,12 +69,10 @@ export class RealStateDetailsComponent {
     const previous = this.currentSlide - 1;
     this.currentSlide =
       previous < 0 ? this.propertyData[i].images.length - 1 : previous;
-    console.log('previous clicked, new current slide is: ', this.currentSlide);
   }
 
   onNextClick(i) {
     const next = this.currentSlide + 1;
     this.currentSlide = next === this.propertyData[i].images.length ? 0 : next;
-    console.log('next clicked, new current slide is: ', this.currentSlide);
   }
 }
